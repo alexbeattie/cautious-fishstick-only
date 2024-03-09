@@ -1,0 +1,114 @@
+2024-03-07 19:13:22 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x463fc6000; archive(resolved)="<IDEArchive: 0x600055d01c80>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	Chain (16, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x463fc6000; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x463fc5d60; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x463fc5b30; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x467ab17b0; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x467ae6b80; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x4694ddb30; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x466837900; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x467ade3f0; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x46f89ef60; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x6000060104c0; teamID='LR4SP9C264', teamName='Artisan Branding, LLC', teamType='Company', username='artisanbranding@me.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x46fa6cee0; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="(null)">
+	<IDEDistributionContext: 0x463f1b980; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="(null)">
+	<IDEDistributionContext: 0x463f71b30; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="(null)">
+	<IDEDistributionContext: 0x466813260; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x60005bb65d20>", team="(null)">
+	<IDEDistributionContext: 0x466cebb70; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="(null)", team="(null)">
+	<IDEDistributionContext: 0x4694d9c20; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="(null)", team="(null)">
+	<IDEDistributionContext: 0x469366570; archive = "<IDEArchive: 0x600055d01c80>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x463fc6000>
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCreateDestRootStep
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCopyItemStep
+2024-03-07 19:13:22 +0000  Running /usr/bin/ditto '-V' '/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app' '/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root/Payload/NewAPI.app'
+2024-03-07 19:13:22 +0000  >>> Copying /Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app 
+2024-03-07 19:13:22 +0000  copying file ./_CodeSignature/CodeResources ... 
+2024-03-07 19:13:22 +0000  2111 bytes for ./_CodeSignature/CodeResources
+2024-03-07 19:13:22 +0000  copying file ./NewAPI ... 
+2024-03-07 19:13:22 +0000  1212672 bytes for ./NewAPI
+copying file ./embedded.mobileprovision ... 
+2024-03-07 19:13:22 +0000  12331 bytes for ./embedded.mobileprovision
+2024-03-07 19:13:22 +0000  copying file ./Info.plist ... 
+2024-03-07 19:13:22 +0000  1353 bytes for ./Info.plist
+2024-03-07 19:13:22 +0000  copying file ./PkgInfo ... 
+2024-03-07 19:13:22 +0000  8 bytes for ./PkgInfo
+2024-03-07 19:13:22 +0000  /usr/bin/ditto exited with 0
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionEmbedProfileStep
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionInfoPlistStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionSymbolsStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionAppThinningStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionArchThinningStep
+2024-03-07 19:13:22 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root/Payload/NewAPI.app/NewAPI' '-verify_arch' 'arm64e'
+2024-03-07 19:13:22 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2024-03-07 19:13:22 +0000  Skipping architecture thinning for item "NewAPI" because arch "arm64e" wasn't found
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionODRStep
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionStripXattrsStep
+2024-03-07 19:13:22 +0000  Skipping stripping extended attributes because the codesign step will strip them.
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCodesignStep
+2024-03-07 19:13:22 +0000  Entitlements for <IDEDistributionItem: 0x60002d228a80; bundleID='com.artistanbranding.NewAPI', path='<DVTFilePath:0x6000291598f0:'/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x60007db942d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x600020d19140; name='Apple Development: Alex Beattie (Z7J79292FW)', hash='972671BAD833F631757EF2BBE848B762F1B88E5D', serialNumber='277A38206E56F4828624DF83C96E5DBD', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-03-28 15:40:57 +0000''>', entitlements='{
+    "application-identifier" = "LR4SP9C264.com.artistanbranding.NewAPI";
+    "com.apple.developer.team-identifier" = LR4SP9C264;
+    "get-task-allow" = 1;
+}', teamID='LR4SP9C264', identifier='com.artistanbranding.NewAPI', executablePath='<DVTFilePath:0x60002d224960:'/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app/NewAPI'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "LR4SP9C264.com.artistanbranding.NewAPI";
+    "com.apple.developer.team-identifier" = LR4SP9C264;
+    "get-task-allow" = 1;
+}
+2024-03-07 19:13:22 +0000  Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2024-03-07 19:13:22 +0000  Entitlements for <IDEDistributionItem: 0x60002d228a80; bundleID='com.artistanbranding.NewAPI', path='<DVTFilePath:0x6000291598f0:'/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x60007db942d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000142b0240; name='Apple Development: Alex Beattie (Z7J79292FW)', hash='972671BAD833F631757EF2BBE848B762F1B88E5D', serialNumber='277A38206E56F4828624DF83C96E5DBD', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-03-28 15:40:57 +0000''>', entitlements='{
+    "application-identifier" = "LR4SP9C264.com.artistanbranding.NewAPI";
+    "com.apple.developer.team-identifier" = LR4SP9C264;
+    "get-task-allow" = 1;
+}', teamID='LR4SP9C264', identifier='com.artistanbranding.NewAPI', executablePath='<DVTFilePath:0x60002d224960:'/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app/NewAPI'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "LR4SP9C264.com.artistanbranding.NewAPI";
+    "com.apple.developer.team-identifier" = LR4SP9C264;
+    "get-task-allow" = 1;
+}
+2024-03-07 19:13:22 +0000  Writing entitlements for <IDEDistributionItem: 0x60002d228a80; bundleID='com.artistanbranding.NewAPI', path='<DVTFilePath:0x6000291598f0:'/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x60007db942d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000142b33c0; name='Apple Development: Alex Beattie (Z7J79292FW)', hash='972671BAD833F631757EF2BBE848B762F1B88E5D', serialNumber='277A38206E56F4828624DF83C96E5DBD', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-03-28 15:40:57 +0000''>', entitlements='{
+    "application-identifier" = "LR4SP9C264.com.artistanbranding.NewAPI";
+    "com.apple.developer.team-identifier" = LR4SP9C264;
+    "get-task-allow" = 1;
+}', teamID='LR4SP9C264', identifier='com.artistanbranding.NewAPI', executablePath='<DVTFilePath:0x60002d224960:'/Users/alexbeattie/Library/Developer/Xcode/Archives/2024-03-07/NewAPI 3-7-24, 11.10 AM.xcarchive/Products/Applications/NewAPI.app/NewAPI'>', hardenedRuntime='0'>'> to: /var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/entitlements~~~aIwzNt
+2024-03-07 19:13:22 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' '972671BAD833F631757EF2BBE848B762F1B88E5D' '--entitlements' '/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/entitlements~~~aIwzNt' '--generate-entitlement-der' '--strip-disallowed-xattrs' '--preserve-metadata=identifier,flags,runtime' '/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root/Payload/NewAPI.app'
+2024-03-07 19:13:22 +0000  /var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root/Payload/NewAPI.app: replacing existing signature
+2024-03-07 19:13:22 +0000  /var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root/Payload/NewAPI.app: signed app bundle with Mach-O thin (arm64) [com.artistanbranding.NewAPI]
+2024-03-07 19:13:22 +0000  /usr/bin/codesign exited with 0
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionZipODRItemStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCreateIPAStep
+2024-03-07 19:13:22 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root' '/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Packages/NewAPI.ipa'
+2024-03-07 19:13:22 +0000  >>> Copying /var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root 
+2024-03-07 19:13:22 +0000  copying file ./Payload/NewAPI.app/_CodeSignature/CodeResources ... 
+2024-03-07 19:13:22 +0000  2111 bytes for ./Payload/NewAPI.app/_CodeSignature/CodeResources
+2024-03-07 19:13:22 +0000  copying file ./Payload/NewAPI.app/NewAPI ... 
+2024-03-07 19:13:22 +0000  1212672 bytes for ./Payload/NewAPI.app/NewAPI
+2024-03-07 19:13:22 +0000  copying file ./Payload/NewAPI.app/embedded.mobileprovision ... 
+2024-03-07 19:13:22 +0000  12331 bytes for ./Payload/NewAPI.app/embedded.mobileprovision
+copying file ./Payload/NewAPI.app/Info.plist ... 
+2024-03-07 19:13:22 +0000  1353 bytes for ./Payload/NewAPI.app/Info.plist
+copying file ./Payload/NewAPI.app/PkgInfo ... 
+2024-03-07 19:13:22 +0000  8 bytes for ./Payload/NewAPI.app/PkgInfo
+2024-03-07 19:13:22 +0000  /usr/bin/ditto exited with 0
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2024-03-07 19:13:22 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2024-03-07 19:13:22 +0000  IDEDistributionItem init <DVTFilePath:0x60009d0f9880:'/var/folders/fk/t7gdmy915q94tw285phq9kz40000gn/T/XcodeDistPipeline.~~~pHdma6/Root/Payload/NewAPI.app'>
+2024-03-07 19:13:22 +0000  Processing step: IDEDistributionCreateManifestStep
