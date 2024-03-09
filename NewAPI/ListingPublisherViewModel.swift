@@ -5,6 +5,9 @@ class ListingPublisherViewModel: ObservableObject {
     @Published var results = [Value]()
     @Published var listings = [Listing]()
     
+    
+    
+    
     private let baseURL = "https://replication.sparkapi.com/Reso/OData/Property"
     private let token = TOKEN
     

@@ -74,16 +74,38 @@ struct PropertyDetailsView: View {
     
     var body: some View {
         
-        HStack(alignment: .bottom) {
-            PropertyDetailItem(title: "$\(value.ListPrice ?? 0)", subtitle: "Price")
-            Spacer()
-            PropertyDetailItem(title: "\(value.BedroomsTotal ?? 0)", subtitle: "Beds", imageName: "bed.double")
-            Spacer()
-            PropertyDetailItem(title: "\(value.BathroomsTotalInteger ?? 0)", subtitle: "Baths", imageName: "bathtub")
-            Spacer()
-            PropertyDetailItem(title: "\(value.BuildingAreaTotal ?? 0)", subtitle: "Sq Feet")
-        }
-        .ignoresSafeArea()
+        VStack {
+            HStack(alignment: .bottom, spacing: 8) {
+                VStack (alignment: .leading){
+                HStack {
+                    Label("$\(value.ListPrice ?? 0)", systemImage: "")
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(.gray)
+                }
+            }
+                
+                HStack {
+                    Label("\(value.BedroomsTotal ?? 0) Beds", systemImage: "bed.double")
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(.gray)
+                }
+                
+                HStack {
+                    Label("\(value.BathroomsTotalInteger ?? 0) Baths", systemImage: "bathtub")
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(.gray)
+                }
+                
+                HStack {
+                    Text("\(value.BuildingAreaTotal ?? 0) sqft")
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(.gray)
+                }
+                
+            }
+//            .padding(.horizontal)
+        }       
+//        .ignoresSafeArea()
 
     }
 

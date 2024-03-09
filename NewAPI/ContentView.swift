@@ -5,8 +5,11 @@ struct ContentView: View {
     @StateObject var vm = ListingPublisherViewModel()
     @State private var showingSheet = false
     @State private var destinationSearchView = false
-    
+    @State private var selectedListing: Value?
+    @StateObject private var viewModel = ListingPublisherViewModel()
+
     var body: some View {
+        
         VStack(alignment: .leading, spacing: 8.0) {
             NavigationView {
                 ScrollView {
@@ -34,9 +37,10 @@ struct ContentView: View {
                                 ListingRowView(listing: listing)
                                 
                                 HStack(alignment: .center) {
-                                    ListingDetailsView(listing: listing, showingSheet: $showingSheet)
+                                    ListingDetailsView(listing: listing, selectedListing: $selectedListing, showingSheet: $showingSheet)
                                 }
-                                .padding(.horizontal)
+                                
+                                //                                .padding(.horizontal)
                             }
                         }
                         .padding(.bottom)
@@ -45,6 +49,9 @@ struct ContentView: View {
                 .ignoresSafeArea()
                 .preferredColorScheme(.dark)
             }
+        }
+        .sheet(item: $selectedListing) { listing in
+            PopDestDetailsView(value: listing)
         }
         .task {
             await vm.fetchProducts()
@@ -122,8 +129,9 @@ struct MlsStatusView: View {
 
 struct ListingDetailsView: View {
     let listing: Value
+    @Binding var selectedListing: Value?
     @Binding var showingSheet: Bool
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(listing.ListAgentFullName ?? "")
@@ -137,12 +145,13 @@ struct ListingDetailsView: View {
 //            }
             
             Button("VIEW DETAILS") {
+                selectedListing = listing
                 showingSheet.toggle()
             }
-            .sheet(isPresented: $showingSheet) {
-                PopDestDetailsView(value: listing)
-            }
-            
+//            .sheet(isPresented: $showingSheet) {
+//                PopDestDetailsView(value: listing)
+//            }
+//            
 //            HStack {
 //                Text(listing.ListPrice ?? 0, format: .currency(code: "USD"))
 //                    .font(.system(size: 14, weight: .regular))
