@@ -1,63 +1,90 @@
 import SwiftUI
 import Combine
+import Kingfisher
 
+//class ListingSelectionViewModel: ObservableObject {
+//    @Published var selectedListing: Value?
+////    @Published var showDetails: Bool = false
+//}
 struct ContentView: View {
     @StateObject var vm = ListingPublisherViewModel()
-    @State private var showingSheet = false
-    @State private var destinationSearchView = false
     @State private var selectedListing: Value?
-    @StateObject private var viewModel = ListingPublisherViewModel()
-
+//    @StateObject private var viewModel = ListingPublisherViewModel()
+//    @StateObject private var selectionViewModel = ListingSelectionViewModel()
+                    
+    @State private var showDetails = false
+    @State private var isLoading = true
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 8.0) {
             NavigationView {
-                ScrollView {
-                    ForEach(vm.results, id: \.ListingKey) { listing in
-                        NavigationLink {
-                            NavigationLazyView(PopDestDetailsView(value: listing))
-                        } label: {
-                            VStack(alignment: .leading) {
+                if isLoading {
+                    ProgressView()
+                } else {
+                    ScrollView {
+                        ForEach(vm.results) { listing in
+                            
+                            VStack() {
                                 HStack {
-                                    AsyncImage(url: URL(string: listing.Media?.first?.MediaURL ?? "")) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                            .aspectRatio(contentMode: .fill)
-                                            .clipped()
-                                            .ignoresSafeArea()
-                                            .overlay(alignment: .bottom) {
-                                                ImageOverlayView(listing: listing)
-                                            }
-                                    } placeholder: {
-                                        ProgressView()
+                                    KFImage(URL(string: listing.Media?.first?.MediaURL ?? ""))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .aspectRatio(contentMode: .fill)
+                                        .clipped()
+                                        .ignoresSafeArea()
+                                        .overlay(alignment: .bottom) {
+                                            ImageOverlayView(listing: listing)
+                                        }
+                                    
+                                }
+                            }
+                            Button(action: {
+                                
+                                selectedListing = listing
+                                //                                    selectionViewModel.showDetails = true
+                            }) {
+                                HStack {
+                                    VStack {
+                                        
+                                        ListingRowView(listing: listing)
                                     }
                                 }
                                 
-                                ListingRowView(listing: listing)
-                                
-                                HStack(alignment: .center) {
-                                    ListingDetailsView(listing: listing, selectedListing: $selectedListing, showingSheet: $showingSheet)
-                                }
-                                
-                                //                                .padding(.horizontal)
                             }
+                            HStack {
+                                VStack {
+                                    ListingDetailsView(listing: listing, selectedListing: $selectedListing, showDetails: $showDetails)
+                                }
+                            }
+                            
+                            .padding(.bottom)
                         }
-                        .padding(.bottom)
+                        
                     }
+                    .ignoresSafeArea()
+                    .preferredColorScheme(.dark)
                 }
-                .ignoresSafeArea()
-                .preferredColorScheme(.dark)
             }
         }
-        .sheet(item: $selectedListing) { listing in
-            PopDestDetailsView(value: listing)
+        .sheet(isPresented: $showDetails) {
+            self.sheetContent()
         }
         .task {
             await vm.fetchProducts()
+            isLoading = false
         }
     }
-}
+        
+        @ViewBuilder
+        private func sheetContent() -> some View {
+            if let listing = selectedListing {
+                PopDestDetailsView(value: listing, showDismissButton: true, showDetails: $showDetails)
+            } else {
+                EmptyView()
+            }
+        }
+    }
 
 struct ImageOverlayView: View {
     let listing: Value
@@ -130,36 +157,38 @@ struct MlsStatusView: View {
 struct ListingDetailsView: View {
     let listing: Value
     @Binding var selectedListing: Value?
-    @Binding var showingSheet: Bool
+    @Binding var showDetails: Bool
+
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(listing.ListAgentFullName ?? "")
                 .font(.system(size: 16, weight: .regular))
-            
-//            HStack {
-//                Text(listing.MlsStatus ?? "")
-//                    .font(.system(size: 16, weight: .medium))
-//                    .foregroundColor(Color(.tertiaryLabel))
-//            
-//            }
+
             
             Button("VIEW DETAILS") {
+                //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                print("Button tapped, listing: \(listing.ListingKey ?? "N/A")")
+                
                 selectedListing = listing
-                showingSheet.toggle()
+                
+                showDetails = (selectedListing != nil)
+                print("showDetails set to \(showDetails)")
+
+                //                }
+                //                showingSheet.toggle()
             }
-//            .sheet(isPresented: $showingSheet) {
+//            .sheet(isPresented: $showDetails) {
 //                PopDestDetailsView(value: listing)
 //            }
-//            
-//            HStack {
-//                Text(listing.ListPrice ?? 0, format: .currency(code: "USD"))
-//                    .font(.system(size: 14, weight: .regular))
-//                Text(listing.formattedLaunchDate)
-//                    .font(.system(size: 14, weight: .regular))
-//            }
+
             .padding(.horizontal)
         }
+//        .onAppear {
+//                  if selectedListing == listing {
+//                      showDetails = true
+//                  }
+//              }
     }
 }
 

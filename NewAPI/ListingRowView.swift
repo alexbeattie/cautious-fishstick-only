@@ -46,8 +46,8 @@ struct ListingRowView: View {
                     .font(.system(size: 14, weight: .regular))
                     .foregroundColor(.gray)
               
-            }
-            HStack() {
+           
+           
                 Text("\(listing.City ?? ""),")
                     .font(.system(size: 14, weight: .regular))
                     .foregroundColor(.gray)
@@ -64,3 +64,26 @@ struct ListingRowView: View {
         .padding(.horizontal)
     }
 }
+
+#if DEBUG
+struct ListingRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        ListingRowView(listing: Value(
+//            id: "1",
+            AssociationAmenities: [],
+            CommunityFeatures: [],
+            Disclosures: [],
+            LotFeatures: [],
+            BedroomsTotal: 3,
+            StateOrProvince: "CA",
+            City: "Anytown",
+
+            BathroomsTotalInteger: 2,
+            BuildingAreaTotal: 1500,
+            StreetNumber: "123",
+            StreetName: "Main St"
+         
+        ))
+    }
+}
+#endif

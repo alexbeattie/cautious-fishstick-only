@@ -2,50 +2,137 @@ import SwiftUI
 import MapKit
 import Kingfisher
 
-struct PopDestDetailsView: View {
-    let value: Value
-    
-    @State private var region: MKCoordinateRegion
-//    @Environment(\.dismiss) var dismiss
-    @State private var isFullScreen = false
-    
 
-    init(value: Value) {
+
+
+struct PopDestDetailsView: View {
+    
+    
+ 
+
+    
+    let value: Value
+    let showDismissButton: Bool
+    @Binding var showDetails: Bool
+    
+    @State private var selectedAnnotation: MKAnnotation?
+//    @State private var presentAlert = false
+    @State private var directionsMapItem: MKMapItem?
+    @State private var showDirections = false
+    @State private var region: MKCoordinateRegion
+    @State private var isFullScreen = false
+    @Environment(\.presentationMode) var presentationMode
+    
+    init(value: Value, showDismissButton: Bool, showDetails: Binding<Bool> = .constant(false)) {
         self.value = value
+        self.showDismissButton = showDismissButton
+        self._showDetails = showDetails
         self._region = State(initialValue: MKCoordinateRegion(center: .init(latitude: value.Latitude ?? 0, longitude: value.Longitude ?? 0), span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)))
     }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                ImageCarouselView(media: value.Media ?? [])
-                    .frame(height: 320)
+        ZStack (alignment: .topLeading){
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    if showDirections {
+                        DirectionsView(mapItem: directionsMapItem!)
+                            .frame(height: 200)
+                    }
                 
-                PropertyDetailsView(value: value)
-                    .padding(.horizontal)
-                
-                Spacer()
-                
-                WebsiteLinkView(value: value)
-                
-                PropertyDescriptionView(value: value)
-                    .padding()
-                
-                Divider()
-                
-                FullScreenMapToggle(isFullScreen: $isFullScreen)
-                    .padding()
-                MapView(value: value, isFullScreen: isFullScreen)
-                    .frame(height: isFullScreen ? UIScreen.main.bounds.height : 200)
-                    .edgesIgnoringSafeArea(isFullScreen ? .all : [])
-            
+                    ImageCarouselView(media: value.Media ?? [])
+                        .frame(height: 320)
+                    
+                    PropertyDetailsView(value: value)
+                        .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    WebsiteLinkView(value: value)
+                    PropertyDescriptionView(value: value)
+                        .padding()
+                    
+                    Divider()
+                    
+//                    FullScreenMapToggle(isFullScreen: $isFullScreen)
+//                        .padding()
+                    
+                    MapView(value: value, selectedAnnotation: $selectedAnnotation, directionsMapItem: $directionsMapItem)
+                        .frame(height: isFullScreen ? UIScreen.main.bounds.height : 200)
+                        .edgesIgnoringSafeArea(isFullScreen ? .all : [])
+                }
+//                .alert(isPresented: $presentAlert) {
+//                        Alert(
+//                            title: Text("Get Directions"),
+//                                          message: Text("Do you want to get directions to the selected location?"),
+//                                          primaryButton: .default(Text("Show Directions")) {
+//                                              showDirections = true
+//                                          },
+//                            secondaryButton: .cancel()
+//                        )
+//                    }
             }
-            .ignoresSafeArea()
+//            .transition(.slide)
+            if showDismissButton {
+                Button(action: {
+                    // Dismiss the sheet
+                    showDetails = false
+                }) {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .font(.system(size: 16, weight: .light))
+                        .frame(width: 30, height: 30)
+                        .clipShape(Circle())
+                }
+                .offset(x: 15, y: 15)
+            }
         }
-        .transition(.slide)
+        .edgesIgnoringSafeArea(.all)
+//        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle("", displayMode: .inline)
     }
-
-
+}
+struct DirectionsView: UIViewRepresentable {
+    let mapItem: MKMapItem
+    
+    func makeUIView(context: Context) -> MKMapView {
+        let mapView = MKMapView(frame: .zero)
+        mapView.delegate = context.coordinator
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = mapItem
+        request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            mapView.addOverlay(route.polyline)
+            mapView.setVisibleMapRect(route.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), animated: true)
+        }
+        
+        return mapView
+    }
+    
+    func updateUIView(_ mapView: MKMapView, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, MKMapViewDelegate {
+        var parent: DirectionsView
+        
+        init(_ parent: DirectionsView) {
+            self.parent = parent
+        }
+        
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = .blue
+            renderer.lineWidth = 5
+            return renderer
+        }
+    }
 }
 
 struct ImageCarouselView: View {
@@ -54,16 +141,12 @@ struct ImageCarouselView: View {
     var body: some View {
         TabView {
             ForEach(media, id: \.MediaKey) { media in
-                KFImage(URL(string: media.MediaURL ?? ""))
+                KFImage(URL(string: media.MediaURL ?? "")).cacheMemoryOnly()
                     .resizable()
                     .scaledToFill()
             }
         }
         .tabViewStyle(.page)
-//        .overlay(alignment: .topLeading) {
-//            DismissButton()
-//                .padding(62)
-//        }
     }
 }
 
@@ -78,7 +161,7 @@ struct PropertyDetailsView: View {
             HStack(alignment: .bottom, spacing: 8) {
                 VStack (alignment: .leading){
                 HStack {
-                    Label("$\(value.ListPrice ?? 0)", systemImage: "")
+                    Text("$\(value.ListPrice ?? 0)")
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
                 }
@@ -269,23 +352,25 @@ struct PropertyDescriptionView: View {
         }
 }
        
-struct FullScreenMapToggle: View {
-    @Binding var isFullScreen: Bool
-    
-    var body: some View {
-        Toggle("Full Screen", isOn: $isFullScreen)
-    }
-}
+//struct FullScreenMapToggle: View {
+//    @Binding var isFullScreen: Bool
+//    
+//    var body: some View {
+//        Toggle("Full Screen", isOn: $isFullScreen)
+//    }
+//}
 
 struct MapView: UIViewRepresentable {
     let value: Value
-    let isFullScreen: Bool
-    
+//    let isFullScreen: Bool
+    @Binding var selectedAnnotation: MKAnnotation?
+//    @Binding var presentAlert: Bool
+    @Binding var directionsMapItem: MKMapItem?
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
-    func updateUIView(_ view: MKMapView, context: Context) {
+    func updateUIView(_ view: MapViewWithOverlay, context: Context) {
         view.mapType = .hybrid
         view.delegate = context.coordinator
         
@@ -305,8 +390,10 @@ struct MapView: UIViewRepresentable {
         view.addAnnotation(annotation)
     }
     
-    func makeUIView(context: Context) -> MKMapView {
-        MKMapView(frame: .zero)
+    func makeUIView(context: Context) -> MapViewWithOverlay {
+        let mapView = MapViewWithOverlay(frame: .zero)
+        mapView.delegate = context.coordinator
+        return mapView
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -315,7 +402,23 @@ struct MapView: UIViewRepresentable {
         init(_ parent: MapView) {
             self.parent = parent
         }
-        
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            guard let annotation = view.annotation else { return }
+            parent.selectedAnnotation = annotation
+            
+            let placemark = MKPlacemark(coordinate: annotation.coordinate)
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = annotation.title ?? ""
+            
+//            parent.presentAlert = true
+            parent.directionsMapItem = mapItem
+            
+            //               let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+            //               mapItem.openInMaps(launchOptions: launchOptions)
+        }
+        func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+            parent.selectedAnnotation = nil
+        }
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard !(annotation is MKUserLocation) else {
                 return nil
@@ -337,8 +440,21 @@ struct MapView: UIViewRepresentable {
                 leftIconView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
                 leftIconView.contentMode = .scaleAspectFill
                 leftIconView.clipsToBounds = true
-                leftIconView.kf.setImage(with: URL(string: "your-image-url"))
-                annotationView?.leftCalloutAccessoryView = leftIconView
+                
+                if let mediaURL = parent.value.Media?.first?.MediaURL, let url = URL(string: mediaURL) {
+                    leftIconView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.transition(.fade(0.2))], completionHandler: { result in
+                        switch result {
+                        case .success(_):
+                            annotationView?.leftCalloutAccessoryView = leftIconView
+                        case .failure(_):
+                            leftIconView.image = UIImage(named: "placeholder")
+                            annotationView?.leftCalloutAccessoryView = leftIconView
+                        }
+                    })
+                } else {
+                    leftIconView.image = UIImage(named: "placeholder")
+                    annotationView?.leftCalloutAccessoryView = leftIconView
+                }
             } else {
                 annotationView?.annotation = annotation
             }
@@ -346,4 +462,16 @@ struct MapView: UIViewRepresentable {
             return annotationView
         }
     }
+    class MapViewWithOverlay: MKMapView {
+        func rendererFor(overlay: MKOverlay) -> MKOverlayRenderer? {
+            if let polylineOverlay = overlay as? MKPolyline {
+                let renderer = MKPolylineRenderer(polyline: polylineOverlay)
+                renderer.strokeColor = .blue
+                renderer.lineWidth = 5
+                return renderer
+            }
+            return rendererFor(overlay: overlay)
+        }
+    }
 }
+

@@ -14,7 +14,7 @@ import Foundation
 //            lhs.odataContext == rhs.odataContext
 //    }
 //}
-extension Listing: Equatable {}
+//extension Listing: Equatable {}
 
 struct Listing: Codable {
 //    static func == (lhs: Listing, rhs: Listing) -> Bool {
@@ -48,7 +48,7 @@ struct Listing: Codable {
 }
 //extension Value: Equatable {}
 
-struct Value: Codable, Equatable, Identifiable {
+struct Value: Codable, Identifiable {
     static func == (lhs: Value, rhs: Value) -> Bool {
         return lhs.id == rhs.id
     }
