@@ -2,30 +2,21 @@ import SwiftUI
 import Combine
 import Kingfisher
 
-//class ListingSelectionViewModel: ObservableObject {
-//    @Published var selectedListing: Value?
-////    @Published var showDetails: Bool = false
-//}
 struct ContentView: View {
     @StateObject var vm = ListingPublisherViewModel()
     @State private var selectedListing: Value?
-//    @StateObject private var viewModel = ListingPublisherViewModel()
-//    @StateObject private var selectionViewModel = ListingSelectionViewModel()
-                    
     @State private var showDetails = false
     @State private var isLoading = true
     
     var body: some View {
-        
         VStack(alignment: .leading, spacing: 8.0) {
             NavigationView {
                 if isLoading {
                     ProgressView()
                 } else {
                     ScrollView {
-                        ForEach(vm.results) { listing in
-                            
-                            VStack() {
+                        ForEach(vm.results, id: \.ListingKey) { listing in
+                            VStack(alignment: .leading) {
                                 HStack {
                                     KFImage(URL(string: listing.Media?.first?.MediaURL ?? ""))
                                         .resizable()
@@ -36,55 +27,51 @@ struct ContentView: View {
                                         .overlay(alignment: .bottom) {
                                             ImageOverlayView(listing: listing)
                                         }
-                                    
                                 }
-                            }
-                            Button(action: {
                                 
-                                selectedListing = listing
-                                //                                    selectionViewModel.showDetails = true
-                            }) {
-                                HStack {
-                                    VStack {
+                                Button(action: {
+                                    selectedListing = listing
+                                    showDetails = true
+                                }) {
+//                                    ListingRowView(listing: listing)
+                                    VStack(alignment: .center) {
+                                            ListingDetailsView(listing: listing, selectedListing: $selectedListing, showDetails: $showDetails)
                                         
-                                        ListingRowView(listing: listing)
                                     }
+                                    
+
                                 }
-                                
+//                                VStack(alignment: .center) {
+//                                        ListingDetailsView(listing: listing, selectedListing: $selectedListing, showDetails: $showDetails)
+//                                    
+//                                }
                             }
-                            HStack {
-                                VStack {
-                                    ListingDetailsView(listing: listing, selectedListing: $selectedListing, showDetails: $showDetails)
-                                }
-                            }
-                            
                             .padding(.bottom)
                         }
-                        
                     }
                     .ignoresSafeArea()
                     .preferredColorScheme(.dark)
                 }
             }
-        }
-        .sheet(isPresented: $showDetails) {
-            self.sheetContent()
+            .sheet(isPresented: $showDetails) {
+                self.sheetContent()
+            }
         }
         .task {
             await vm.fetchProducts()
             isLoading = false
         }
     }
-        
-        @ViewBuilder
-        private func sheetContent() -> some View {
-            if let listing = selectedListing {
-                PopDestDetailsView(value: listing, showDismissButton: true, showDetails: $showDetails)
-            } else {
-                EmptyView()
-            }
+    
+    @ViewBuilder
+    func sheetContent() -> some View {
+        if let listing = selectedListing {
+            PopDestDetailsView(value: listing, showDismissButton: true, showDetails: $showDetails)
+        } else {
+            EmptyView()
         }
     }
+}
 
 struct ImageOverlayView: View {
     let listing: Value
@@ -159,48 +146,40 @@ struct ListingDetailsView: View {
     @Binding var selectedListing: Value?
     @Binding var showDetails: Bool
 
-
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(listing.ListAgentFullName ?? "")
-                .font(.system(size: 16, weight: .regular))
-
-            
-            Button("VIEW DETAILS") {
-                //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                print("Button tapped, listing: \(listing.ListingKey ?? "N/A")")
-                
-                selectedListing = listing
-                
-                showDetails = (selectedListing != nil)
-                print("showDetails set to \(showDetails)")
-
-                //                }
-                //                showingSheet.toggle()
+        
+        VStack(alignment: .center) {
+            Spacer()
+            HStack(alignment: .center) {
+                ListingRowView(listing: listing)
+                    .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
             }
-//            .sheet(isPresented: $showDetails) {
-//                PopDestDetailsView(value: listing)
+//            HStack(alignment: .center) {
+                
+                Text(listing.ListAgentFullName ?? "")
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundColor(.gray)
+
 //            }
-
-            .padding(.horizontal)
+            Spacer()
+        
         }
-//        .onAppear {
-//                  if selectedListing == listing {
-//                      showDetails = true
-//                  }
-//              }
-    }
-}
 
-struct NavigationLazyView<Content: View>: View {
-    let build: () -> Content
-    
-    init(_ build: @autoclosure @escaping () -> Content) {
-        self.build = build
-    }
-    
-    var body: Content {
-        build()
+        HStack(alignment: .center) {
+            
+            HStack {
+                VStack {
+                    Button("VIEW DETAILS") {
+                        selectedListing = listing
+                        showDetails = true
+                    }
+                }
+            }
+        }
+
+//        .padding(.horizontal)
+
+
     }
 }
 

@@ -12,64 +12,44 @@ import SwiftUI
 
 struct ListingRowView: View {
     let listing: Value // Assuming `Value` is your data model type
-
+    
     var body: some View {
-        VStack {
-            HStack(alignment: .bottom, spacing: 8) {
-                HStack() {
+        VStack(alignment: .center) {
+            VStack(alignment: .center) {
+                HStack {
                     Label("\(listing.BedroomsTotal ?? 0) Beds", systemImage: "bed.double")
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
-                        
-                }
-                
-                
-                HStack(alignment: .center) {
+                    
                     Label("\(listing.BathroomsTotalInteger ?? 0) Baths", systemImage: "bathtub")
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
-                }
-                
-                HStack(alignment: .center) {
+                    
                     Text("\(listing.BuildingAreaTotal ?? 0) sqft")
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.gray)
+                    
                 }
-            }.padding(.horizontal)
-        }
-        VStack(alignment: .leading){
-            HStack() {
-                Text("\(listing.StreetNumber ?? "")")
-                    .font(.system(size: 14, weight: .regular))
-                    .foregroundColor(.gray)
-                Text("\(listing.StreetName ?? "")")
-                    .font(.system(size: 14, weight: .regular))
-                    .foregroundColor(.gray)
-              
-           
-           
-                Text("\(listing.City ?? ""),")
-                    .font(.system(size: 14, weight: .regular))
-                    .foregroundColor(.gray)
-                Text("\(listing.StateOrProvince ?? "")")
-                    .font(.system(size: 14, weight: .regular))
-                    .foregroundColor(.gray)
+                
+                
+                VStack(alignment: .center) {
+                    HStack {
+                        Text("\(listing.StreetNumber ?? "") \(listing.StreetName ?? "") \(listing.City ?? ""),\(listing.StateOrProvince ?? "")")
+                            .font(.system(size: 14, weight: .regular))
+                            .foregroundColor(.gray)
+                    }
+                }
             }
-//            Text(AttributedString(listing.UnparsedAddress ?? ""))
-//                .font(.system(size: 14, weight: .regular))
-//                .foregroundColor(Color(.label))
-//                .minimumScaleFactor(0.01)
-//                .lineLimit(1)
+            Spacer()
+
         }
-        .padding(.horizontal)
     }
 }
-
 #if DEBUG
 struct ListingRowView_Previews: PreviewProvider {
     static var previews: some View {
         ListingRowView(listing: Value(
-//            id: "1",
+            //            id: "1",
             AssociationAmenities: [],
             CommunityFeatures: [],
             Disclosures: [],
@@ -77,12 +57,12 @@ struct ListingRowView_Previews: PreviewProvider {
             BedroomsTotal: 3,
             StateOrProvince: "CA",
             City: "Anytown",
-
+            
             BathroomsTotalInteger: 2,
             BuildingAreaTotal: 1500,
             StreetNumber: "123",
             StreetName: "Main St"
-         
+            
         ))
     }
 }
